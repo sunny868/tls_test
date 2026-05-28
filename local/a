@@ -1,0 +1,199 @@
+
+libkzt.so：     文件格式 elf64-loongarch
+
+
+Disassembly of section .plt:
+
+0000000000000680 <.plt>:
+ 680:	1c00010e 	pcaddu12i	$r14,8(0x8)
+ 684:	0011bdad 	sub.d	$r13,$r13,$r15
+ 688:	28e601cf 	ld.d	$r15,$r14,-1664(0x980)
+ 68c:	02ff61ad 	addi.d	$r13,$r13,-40(0xfd8)
+ 690:	02e601cc 	addi.d	$r12,$r14,-1664(0x980)
+ 694:	004505ad 	srli.d	$r13,$r13,0x1
+ 698:	28c0218c 	ld.d	$r12,$r12,8(0x8)
+ 69c:	4c0001e0 	jirl	$r0,$r15,0
+
+00000000000006a0 <pthread_mutex_unlock@plt>:
+ 6a0:	1c00010f 	pcaddu12i	$r15,8(0x8)
+ 6a4:	28e5c1ef 	ld.d	$r15,$r15,-1680(0x970)
+ 6a8:	1c00000d 	pcaddu12i	$r13,0
+ 6ac:	4c0001e0 	jirl	$r0,$r15,0
+
+00000000000006b0 <__tls_get_addr@plt>:
+ 6b0:	1c00010f 	pcaddu12i	$r15,8(0x8)
+ 6b4:	28e5a1ef 	ld.d	$r15,$r15,-1688(0x968)
+ 6b8:	1c00000d 	pcaddu12i	$r13,0
+ 6bc:	4c0001e0 	jirl	$r0,$r15,0
+
+00000000000006c0 <pthread_mutex_lock@plt>:
+ 6c0:	1c00010f 	pcaddu12i	$r15,8(0x8)
+ 6c4:	28e581ef 	ld.d	$r15,$r15,-1696(0x960)
+ 6c8:	1c00000d 	pcaddu12i	$r13,0
+ 6cc:	4c0001e0 	jirl	$r0,$r15,0
+
+Disassembly of section .text:
+
+00000000000006d0 <deregister_tm_clones>:
+ 6d0:	02ffc063 	addi.d	$r3,$r3,-16(0xff0)
+ 6d4:	29c02076 	st.d	$r22,$r3,8(0x8)
+ 6d8:	02c04076 	addi.d	$r22,$r3,16(0x10)
+ 6dc:	1c000104 	pcaddu12i	$r4,8(0x8)
+ 6e0:	02e53084 	addi.d	$r4,$r4,-1716(0x94c)
+ 6e4:	1c00010c 	pcaddu12i	$r12,8(0x8)
+ 6e8:	02e5118c 	addi.d	$r12,$r12,-1724(0x944)
+ 6ec:	58001d84 	beq	$r12,$r4,28(0x1c) # 708 <deregister_tm_clones+0x38>
+ 6f0:	1c00010c 	pcaddu12i	$r12,8(0x8)
+ 6f4:	28e5018c 	ld.d	$r12,$r12,-1728(0x940)
+ 6f8:	40001180 	beqz	$r12,16(0x10) # 708 <deregister_tm_clones+0x38>
+ 6fc:	28c02076 	ld.d	$r22,$r3,8(0x8)
+ 700:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 704:	4c000180 	jirl	$r0,$r12,0
+ 708:	28c02076 	ld.d	$r22,$r3,8(0x8)
+ 70c:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 710:	4c000020 	jirl	$r0,$r1,0
+ 714:	03400000 	andi	$r0,$r0,0x0
+ 718:	03400000 	andi	$r0,$r0,0x0
+ 71c:	03400000 	andi	$r0,$r0,0x0
+
+0000000000000720 <register_tm_clones>:
+ 720:	1c000104 	pcaddu12i	$r4,8(0x8)
+ 724:	02e42084 	addi.d	$r4,$r4,-1784(0x908)
+ 728:	1c000105 	pcaddu12i	$r5,8(0x8)
+ 72c:	02e400a5 	addi.d	$r5,$r5,-1792(0x900)
+ 730:	001190a5 	sub.d	$r5,$r5,$r4
+ 734:	00490ca5 	srai.d	$r5,$r5,0x3
+ 738:	02ffc063 	addi.d	$r3,$r3,-16(0xff0)
+ 73c:	0045fcac 	srli.d	$r12,$r5,0x3f
+ 740:	29c02076 	st.d	$r22,$r3,8(0x8)
+ 744:	00109585 	add.d	$r5,$r12,$r5
+ 748:	02c04076 	addi.d	$r22,$r3,16(0x10)
+ 74c:	004904a5 	srai.d	$r5,$r5,0x1
+ 750:	400020a0 	beqz	$r5,32(0x20) # 770 <register_tm_clones+0x50>
+ 754:	1c00010c 	pcaddu12i	$r12,8(0x8)
+ 758:	28e3f18c 	ld.d	$r12,$r12,-1796(0x8fc)
+ 75c:	40001580 	beqz	$r12,20(0x14) # 770 <register_tm_clones+0x50>
+ 760:	28c02076 	ld.d	$r22,$r3,8(0x8)
+ 764:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 768:	4c000180 	jirl	$r0,$r12,0
+ 76c:	03400000 	andi	$r0,$r0,0x0
+ 770:	28c02076 	ld.d	$r22,$r3,8(0x8)
+ 774:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 778:	4c000020 	jirl	$r0,$r1,0
+ 77c:	03400000 	andi	$r0,$r0,0x0
+
+0000000000000780 <__do_global_dtors_aux>:
+ 780:	02ff8063 	addi.d	$r3,$r3,-32(0xfe0)
+ 784:	29c04076 	st.d	$r22,$r3,16(0x10)
+ 788:	29c02077 	st.d	$r23,$r3,8(0x8)
+ 78c:	29c06061 	st.d	$r1,$r3,24(0x18)
+ 790:	02c08076 	addi.d	$r22,$r3,32(0x20)
+ 794:	1c000117 	pcaddu12i	$r23,8(0x8)
+ 798:	02e332f7 	addi.d	$r23,$r23,-1844(0x8cc)
+ 79c:	2a0002ec 	ld.bu	$r12,$r23,0
+ 7a0:	44003580 	bnez	$r12,52(0x34) # 7d4 <__do_global_dtors_aux+0x54>
+ 7a4:	1c00010c 	pcaddu12i	$r12,8(0x8)
+ 7a8:	28e2918c 	ld.d	$r12,$r12,-1884(0x8a4)
+ 7ac:	40001d80 	beqz	$r12,28(0x1c) # 7c8 <__do_global_dtors_aux+0x48>
+ 7b0:	1c00010c 	pcaddu12i	$r12,8(0x8)
+ 7b4:	02e2a18c 	addi.d	$r12,$r12,-1880(0x8a8)
+ 7b8:	28c00184 	ld.d	$r4,$r12,0
+ 7bc:	1c000101 	pcaddu12i	$r1,8(0x8)
+ 7c0:	28e23021 	ld.d	$r1,$r1,-1908(0x88c)
+ 7c4:	4c000021 	jirl	$r1,$r1,0
+ 7c8:	57ff0bff 	bl	-248(0xfffff08) # 6d0 <deregister_tm_clones>
+ 7cc:	0280040c 	addi.w	$r12,$r0,1(0x1)
+ 7d0:	290002ec 	st.b	$r12,$r23,0
+ 7d4:	28c06061 	ld.d	$r1,$r3,24(0x18)
+ 7d8:	28c04076 	ld.d	$r22,$r3,16(0x10)
+ 7dc:	28c02077 	ld.d	$r23,$r3,8(0x8)
+ 7e0:	02c08063 	addi.d	$r3,$r3,32(0x20)
+ 7e4:	4c000020 	jirl	$r0,$r1,0
+ 7e8:	03400000 	andi	$r0,$r0,0x0
+ 7ec:	03400000 	andi	$r0,$r0,0x0
+
+00000000000007f0 <frame_dummy>:
+ 7f0:	02ffc063 	addi.d	$r3,$r3,-16(0xff0)
+ 7f4:	29c02076 	st.d	$r22,$r3,8(0x8)
+ 7f8:	02c04076 	addi.d	$r22,$r3,16(0x10)
+ 7fc:	28c02076 	ld.d	$r22,$r3,8(0x8)
+ 800:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 804:	53ff1fff 	b	-228(0xfffff1c) # 720 <register_tm_clones>
+ 808:	03400000 	andi	$r0,$r0,0x0
+ 80c:	03400000 	andi	$r0,$r0,0x0
+
+0000000000000810 <getKZTGlobal>:
+ 810:	02ffc063 	addi.d	$r3,$r3,-16(0xff0)
+ 814:	29c02076 	st.d	$r22,$r3,8(0x8)
+ 818:	02c04076 	addi.d	$r22,$r3,16(0x10)
+ 81c:	1c00010c 	pcaddu12i	$r12,8(0x8)
+ 820:	02e1318c 	addi.d	$r12,$r12,-1972(0x84c)
+ 824:	2880018c 	ld.w	$r12,$r12,0
+ 828:	00150184 	move	$r4,$r12
+ 82c:	28c02076 	ld.d	$r22,$r3,8(0x8)
+ 830:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 834:	4c000020 	jirl	$r0,$r1,0
+
+0000000000000838 <getKZTTls>:
+ 838:	02ffc063 	addi.d	$r3,$r3,-16(0xff0)
+ 83c:	29c02061 	st.d	$r1,$r3,8(0x8)
+ 840:	29c00076 	st.d	$r22,$r3,0
+ 844:	02c04076 	addi.d	$r22,$r3,16(0x10)
+ 848:	002a0005 	break	0x5
+ 84c:	1c0000e4 	pcaddu12i	$r4,7(0x7)
+ 850:	02dfb084 	addi.d	$r4,$r4,2028(0x7ec)
+ 854:	57fe5fff 	bl	-420(0xffffe5c) # 6b0 <__tls_get_addr@plt>
+ 858:	0015008c 	move	$r12,$r4
+ 85c:	28c0018c 	ld.d	$r12,$r12,0
+ 860:	00150184 	move	$r4,$r12
+ 864:	28c02061 	ld.d	$r1,$r3,8(0x8)
+ 868:	28c00076 	ld.d	$r22,$r3,0
+ 86c:	02c04063 	addi.d	$r3,$r3,16(0x10)
+ 870:	4c000020 	jirl	$r0,$r1,0
+
+0000000000000874 <testKZT>:
+ 874:	02ff4063 	addi.d	$r3,$r3,-48(0xfd0)
+ 878:	29c0a061 	st.d	$r1,$r3,40(0x28)
+ 87c:	29c08076 	st.d	$r22,$r3,32(0x20)
+ 880:	29c06077 	st.d	$r23,$r3,24(0x18)
+ 884:	02c0c076 	addi.d	$r22,$r3,48(0x30)
+ 888:	0015008d 	move	$r13,$r4
+ 88c:	001500ac 	move	$r12,$r5
+ 890:	004081ad 	slli.w	$r13,$r13,0x0
+ 894:	29bf72cd 	st.w	$r13,$r22,-36(0xfdc)
+ 898:	0040818c 	slli.w	$r12,$r12,0x0
+ 89c:	29bf62cc 	st.w	$r12,$r22,-40(0xfd8)
+ 8a0:	1c0000e4 	pcaddu12i	$r4,7(0x7)
+ 8a4:	02df4084 	addi.d	$r4,$r4,2000(0x7d0)
+ 8a8:	57fe1bff 	bl	-488(0xffffe18) # 6c0 <pthread_mutex_lock@plt>
+ 8ac:	1c0000ec 	pcaddu12i	$r12,7(0x7)
+ 8b0:	02def18c 	addi.d	$r12,$r12,1980(0x7bc)
+ 8b4:	2880018c 	ld.w	$r12,$r12,0
+ 8b8:	0280058c 	addi.w	$r12,$r12,1(0x1)
+ 8bc:	0015018d 	move	$r13,$r12
+ 8c0:	1c0000ec 	pcaddu12i	$r12,7(0x7)
+ 8c4:	02dea18c 	addi.d	$r12,$r12,1960(0x7a8)
+ 8c8:	2980018d 	st.w	$r13,$r12,0
+ 8cc:	1c0000e4 	pcaddu12i	$r4,7(0x7)
+ 8d0:	02de9084 	addi.d	$r4,$r4,1956(0x7a4)
+ 8d4:	57fdcfff 	bl	-564(0xffffdcc) # 6a0 <pthread_mutex_unlock@plt>
+ 8d8:	1c0000e4 	pcaddu12i	$r4,7(0x7)
+ 8dc:	02dd8084 	addi.d	$r4,$r4,1888(0x760)
+ 8e0:	57fdd3ff 	bl	-560(0xffffdd0) # 6b0 <__tls_get_addr@plt>
+ 8e4:	0015008c 	move	$r12,$r4
+ 8e8:	28c0018c 	ld.d	$r12,$r12,0
+ 8ec:	02c00597 	addi.d	$r23,$r12,1(0x1)
+ 8f0:	1c0000e4 	pcaddu12i	$r4,7(0x7)
+ 8f4:	02dd2084 	addi.d	$r4,$r4,1864(0x748)
+ 8f8:	57fdbbff 	bl	-584(0xffffdb8) # 6b0 <__tls_get_addr@plt>
+ 8fc:	0015008c 	move	$r12,$r4
+ 900:	29c00197 	st.d	$r23,$r12,0
+ 904:	28bf72cd 	ld.w	$r13,$r22,-36(0xfdc)
+ 908:	28bf62cc 	ld.w	$r12,$r22,-40(0xfd8)
+ 90c:	001031ac 	add.w	$r12,$r13,$r12
+ 910:	00150184 	move	$r4,$r12
+ 914:	28c0a061 	ld.d	$r1,$r3,40(0x28)
+ 918:	28c08076 	ld.d	$r22,$r3,32(0x20)
+ 91c:	28c06077 	ld.d	$r23,$r3,24(0x18)
+ 920:	02c0c063 	addi.d	$r3,$r3,48(0x30)
+ 924:	4c000020 	jirl	$r0,$r1,0
