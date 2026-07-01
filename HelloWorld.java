@@ -23,15 +23,19 @@ class NativeTest extends Thread {
     }
     @Override
     public void run() {
+        int tls = getTls();
         int result = add(1, threadId);
         result = add(1, result);
         result = add(1, result);
-        System.out.println(getName() + "nso (1+" + threadId + ")+2 = " + result + " global=" + getGlobal() + " tls=" + getTls());
+        tls = getTls();
+        System.out.println("T" + threadId + ": nso (1+" + threadId + ")+2 = " + result + " global=" + getGlobal() + " tls=" + tls);
 
+        tls = getTls2();
         result = add2(1, threadId);
         result = add2(1, result);
         result = add2(1, result);
-        System.out.println(getName() + "nso2 (1+" + threadId + ")+2 = " + result + " global2=" + getGlobal2() + " tls2=" + getTls2());
+        tls = getTls2();
+        System.out.println("T" + threadId + ": nso2 (1+" + threadId + ")+2 = " + result + " global2=" + getGlobal2() + " tls2=" + tls);
     }
 }
         

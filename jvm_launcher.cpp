@@ -1,14 +1,18 @@
 #define _POSIX_C_SOURCE 200809L
 #include <cstring>
 #include <jni.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <dlfcn.h>
 #include <sys/syscall.h>
 #include <unistd.h> 
 #include <pthread.h>
+#include <sys/prctl.h>
+#include <asm/prctl.h>
 
-//__thread int main_tls_val = 0;
+__thread long main_tls_val = 0x33;
+
 static int callJVM() {
     JavaVM *jvm;        // JVM实例
     JNIEnv *env;        // JNI环境
@@ -24,7 +28,7 @@ static int callJVM() {
     vm_args.options = options;          // 选项数组
     vm_args.ignoreUnrecognized = JNI_FALSE; // 不忽略无法识别的选项
    
-   // main_tls_val +=1; 
+    main_tls_val +=1;
     // 创建JVM
     jint res = 0;
 #ifdef TEST_STATIC // 方式一：编译时链接
@@ -51,12 +55,11 @@ static int callJVM() {
         printf("Failed to create JVM, error code: %d\n", res);
         return 1;
     }
-   // main_tls_val +=1; 
-    printf("JVM started successfully!\n");
+
+    main_tls_val +=1;
     
     // 查找Java类
     jclass cls = env->FindClass("HelloWorld");
-    printf("FindClass out!\n");
     if (cls == NULL) {
         env->ExceptionDescribe(); // 打印异常信息
         jvm->DestroyJavaVM();
@@ -81,8 +84,8 @@ static int callJVM() {
     }
     
     jvm->DestroyJavaVM();
-    //main_tls_val +=1; 
-    //printf("[%ld]main_tls_val=%d\n", syscall(SYS_gettid), main_tls_val);
+    main_tls_val +=1;
+    printf("[%ld]main_tls_val=%d\n", syscall(SYS_gettid), main_tls_val);
 }
 
 typedef int (*TESTFUNC)(int, int);
@@ -132,9 +135,9 @@ void* thread_func_dlopen(void* arg) {
     return NULL;
 }
 
-void* thread_func(void* arg) {
+void* thread_func_buildlink(void* arg) {
     thread_arg_t* targ = (thread_arg_t*)arg;
-    printf("Compiled-Linked thread %d: tls = %ld tls2 = %ld\n", targ->id, getTls(), getTls2());
+    //printf("[%ld]Compiled-Linked thread %d: tls = %ld tls2 = %ld\n", syscall(SYS_gettid), targ->id, getTls(), getTls2());
     testAdd(targ->a, targ->b);
 #if 1
     // test resizeTLSData
@@ -147,11 +150,11 @@ void* thread_func(void* arg) {
     testAdd2(targ->a, targ->b);
     testAdd2(targ->a, targ->b);
     long tls2 = getTls2();
-    printf("Compiled-Linked thread %d: tls = %ld tls2 = %ld\n", targ->id, tls, tls2);
+    printf("[%ld]Compiled-Linked thread %d: tls = %ld tls2 = %ld\n", syscall(SYS_gettid), targ->id, tls, tls2);
     return NULL;
 }
 
-#define NUM_THREADS 2
+#define NUM_THREADS 1
 static void testBuildLink() {
     pthread_t threads[NUM_THREADS];
     thread_arg_t args[NUM_THREADS];
@@ -161,7 +164,7 @@ static void testBuildLink() {
         args[i].a = i * 10;
         args[i].b = i * 2;
 
-        if (pthread_create(&threads[i], NULL, thread_func, &args[i]) != 0) {
+        if (pthread_create(&threads[i], NULL, thread_func_buildlink, &args[i]) != 0) {
             perror("pthread_create");
             return;
         }
@@ -284,10 +287,27 @@ void callKZTTest() {
 
     dlclose(handle);
 }
+
+static unsigned long get_fs_base() {
+    unsigned long fs_base = 0;
+    if (syscall(SYS_arch_prctl, ARCH_GET_FS, &fs_base) == 0) {
+        return fs_base;
+    }
+    return 0;
+}
+
+// from libtls.so
+extern long getTls();
+
 int main() {
+    //testBuildLink();
     callJVM();
     //callKZTTest();
-    testDlopen();
-    testBuildLink();
+    //testDlopen();
+
+    fprintf(stderr, "main fs:base=0x%lx get libtls.so=%d\n", get_fs_base(), getTls());
+    main_tls_val +=1;
+    errno = 0;
+    //asm volatile("int3\n\t":::"memory");
     return 0;
 }

@@ -24,7 +24,7 @@ int getGlobal3() { return g_val3; }
 long getTls3() {  return tls_val3 + tls_val3_2 + tls_val3_3; }
 
 void test_free_invalid(void* p) {
-  //free(p);  // 错误：free 栈上变量，非堆地址
+  free(p);  // 错误：free 栈上变量，非堆地址
 }
 int testAdd3(int a, int b) {
   pthread_mutex_lock(&mutex);
@@ -33,7 +33,7 @@ int testAdd3(int a, int b) {
    ++tls_val3;
    ++tls_val3_2;
    ++tls_val3_3;
-   test_free_invalid(&a);
+   //test_free_invalid(&a);
   return a + b;
 }
 

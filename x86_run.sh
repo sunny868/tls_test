@@ -20,4 +20,5 @@ g++ -I${JAVA_HOME}/include -I${JAVA_HOME}/include/linux -L./x86 -ltls -ltls2 -ld
 
 # run
 export LD_LIBRARY_PATH=.:./x86:$LD_LIBRARY_PATH
+#strace -e trace=arch_prctl gdb --args ./jvm_launcher
 ./jvm_launcher
